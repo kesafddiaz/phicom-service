@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProgressController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::post('/progress', [ProgressController::class, 'index'])->name('progress');
