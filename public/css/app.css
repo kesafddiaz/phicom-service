@@ -4,6 +4,3 @@
     font-style: normal;
   }
   
-.progress-bar-animated {
-  animation: progress-bar-stripes 1s linear infinite !important;
-}
