@@ -4,23 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Services extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'services_id';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'services_id',
         'customer_id',
-        'device_details',
+        'service_details',
         'status',
-        'cost_estimate'
+        'total'
     ];
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transactions::class, 'services_id', 'services_id');
+    }
+
 
     /**
      * The attributes that should be cast.
@@ -30,10 +36,11 @@ class Services extends Model
     protected $casts = [
         'services_id' => 'string',
         'status' => 'string',
-        'cost_estimate' => 'float',
+        'total' => 'float',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+    
 
     /**
      * Get the customer associated with the service.
@@ -44,6 +51,8 @@ class Services extends Model
     {
         return $this->belongsTo(Customers::class, 'customer_id');
     }
+    
+
 
     /**
      * Scope a query to filter by service status.
@@ -69,7 +78,7 @@ class Services extends Model
     }
 
     /**
-     * Find a service by its services_id.
+     * Find a service by its id.
      *
      * @param string $servicesId
      * @return \App\Models\Services|null
@@ -78,4 +87,7 @@ class Services extends Model
     {
         return self::where('services_id', $servicesId)->first();
     }
+    
+
+    
 }
