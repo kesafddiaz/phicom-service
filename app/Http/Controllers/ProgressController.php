@@ -16,6 +16,6 @@ class ProgressController extends Controller
         $name = $services->customer->name;
         $status = $services->status;
         // dd($status);
-        return view('progress', compact('status', 'name'));
+        return view('progress', compact('services'));
     }
 }
