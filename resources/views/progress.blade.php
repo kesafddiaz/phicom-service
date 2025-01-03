@@ -21,7 +21,7 @@
         <div class="d-flex flex-column vh-100 justify-content-center align-items-center">
             <div class="text-center mb-4">
                 <h1 class="h2 text-dark" id="greet">
-                    Halo, {{ $name }}
+                    Halo, {{ $services->name }}
                 </h1>
             </div>
             
@@ -30,7 +30,7 @@
                     <h2 class="h5">Status Reparasi Laptop Anda</h2>
                 </section>
 
-                @switch($status)
+                @switch($services->status)
                     @case('MENUNGGU')
                       <div class="d-flex justify-content-between status-label mb-2">
                         <span>Menunggu</span>
@@ -62,7 +62,7 @@
                         <span>Menunggu</span>
                         <span>Sedang Dikerjakan</span>
                         <span>Selesai</span>
-                      </div>
+                    </div>
                         <div class="progress" style="height: 30px;">
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 100%">
                              
@@ -72,19 +72,17 @@
 
                     @case('DIAMBIL')
                         <div class="alert alert-success text-center" role="alert">
-                            <h4 class="alert-heading">Laptop Telah Selesai</h4>
+                            <h4 class="alert-heading">Servis Telah Selesai</h4>
                             <p>Perangkat Anda sudah diambil. Terima kasih telah menggunakan jasa kami.</p>
                         </div>
                         @break
                 @endswitch
+            </div>
 
-                @if($status !== 'DIAMBIL')
-                <div class="text-center mt-3">
-                    <!-- <small class="text-muted">
-                        Estimasi waktu perbaikan: {{ $estimatedTime ?? '3-5 hari kerja' }}
-                    </small> -->
-                </div>
-                @endif
+            <div>
+                <br>
+                <br>
+                <a href="{{ route('landing') }}" class="btn btn-primary mt-3 bg-secondary">Kembali</a>
             </div>
         </div>
     </div>
